@@ -113,6 +113,8 @@ export default function MenuClient({ items, restaurantName, tagline }: Props) {
 }
 
 function MenuItemCard({ item }: { item: MenuItem }) {
+  const currency = process.env.NEXT_PUBLIC_CURRENCY || 'ETB'
+  
   return (
     <div
       className={`
@@ -123,11 +125,12 @@ function MenuItemCard({ item }: { item: MenuItem }) {
     >
       {/* Emoji or Image */}
       {item.imageUrl ? (
-        <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-stone-100">
-          <img
+        <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-stone-100 relative">
+          <Image
             src={item.imageUrl}
             alt={item.name}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
         </div>
       ) : (
@@ -144,7 +147,7 @@ function MenuItemCard({ item }: { item: MenuItem }) {
           </h3>
           <div className="flex-shrink-0 text-right">
             <span className="font-semibold text-sm text-stone-900">
-              ETB {item.price}
+              {currency} {item.price}
             </span>
           </div>
         </div>

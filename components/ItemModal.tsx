@@ -179,7 +179,7 @@ export default function ItemModal({ item, onClose, onSaved }: Props) {
               )}
             </div>
             <div>
-              <label className="text-xs text-stone-500 block mb-1.5">Price (ETB) *</label>
+              <label className="text-xs text-stone-500 block mb-1.5">Price ({process.env.NEXT_PUBLIC_CURRENCY || 'ETB'}) *</label>
               <input
                 type="number"
                 value={form.price}

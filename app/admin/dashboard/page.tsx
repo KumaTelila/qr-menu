@@ -247,7 +247,7 @@ export default function DashboardPage() {
                       </span>
                     </td>
                     <td className="px-4 py-3 font-medium text-stone-900">
-                      ETB {item.price}
+                      {process.env.NEXT_PUBLIC_CURRENCY || 'ETB'} {item.price}
                     </td>
                     <td className="px-4 py-3">
                       <button

@@ -18,14 +18,13 @@ export const authOptions: NextAuthOptions = {
 
         if (!adminEmail || !adminPassword) return null
 
-        // Simple single-admin check
-        // For multiple admins, query a User collection in MongoDB
         if (credentials.email !== adminEmail) return null
 
-        // If you hashed the password with bcrypt:
-        // const valid = await bcrypt.compare(credentials.password, adminPassword)
-        // For plain text (change to hashed in production!):
-        const valid = credentials.password === adminPassword
+        // Support both plain text and hashed passwords
+        const isHashed = adminPassword.startsWith('$2a$') || adminPassword.startsWith('$2b$')
+        const valid = isHashed
+          ? await bcrypt.compare(credentials.password, adminPassword)
+          : credentials.password === adminPassword
 
         if (!valid) return null
 
